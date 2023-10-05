@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User Profile</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+            .form-container h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+                color: #007bff;
+                text-align: center;
+            }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .form-group input,
+            .form-group select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+
+        .error {
+            color: #ff0000;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+        .toggle-link {
+            text-align: center;
+            font-size: 16px;
+        }
+
+            .toggle-link a {
+                color: #007bff;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+                .toggle-link a:hover {
+                    color: #0056b3;
+                }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>User Profile</h1>
+    </header>
+    <div class="container">
+        <!-- Sign-up Form -->
+        <div class="form-container" id="signup-container">
+            <h2>Sign Up</h2>
+            <form id="signup-form" method="post">
+                <div class="form-group">
+                    <label for="signup-username">Username</label>
+                    <input type="text" id="signup-username" name="signup-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="signup-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" name="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-disability">Type of Disability</label>
+                    <select id="signup-disability" name="signup-disability" required>
+                        <option value="physical">Physical Disability</option>
+                        <option value="visual">Visual Impairment</option>
+                        <option value="hearing">Hearing Impairment</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="signup-button">Sign Up</button>
+                </div>
+                <p id="signup-error" class="error"></p>
+            </form>
+            <div class="toggle-link">
+                Already have an account? <a href="#" id="login-link">Login here</a>
+            </div>
+        </div>
+        <!-- Login Form -->
+        <div class="form-container" id="login-container" style="display: none;">
+            <h2>Login</h2>
+            <form id="login-form" method="post">
+                <div class="form-group">
+                    <label for="login-username">Username</label>
+                    <input type="text" id="login-username" name="login-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="login-password" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="login-button"><a href="index.html" style="color:white" ;>Login</a></button>
+                </div>
+                <p id="login-error" class="error"></p>
+            </form>
+            <div class="toggle-link">
+                Don't have an account? <a href="#" id="signup-link">Sign up here</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const signupContainer = document.getElementById("signup-container");
+            const loginContainer = document.getElementById("login-container");
+
+            document.getElementById("login-button").addEventListener("click", function () {
+                // Perform login validation here
+                const loginUsername = document.getElementById("login-username").value;
+                const loginPassword = document.getElementById("login-password").value;
+
+                // For simplicity, you can implement login validation using JavaScript here
+                if (loginUsername === "exampleuser" && loginPassword === "examplepassword") {
+                    // Successful login
+                    alert("Login successful!");
+                    // Redirect or perform further actions
+                } else {
+                    document.getElementById("login-error").textContent = "Invalid username or password.";
+                }
+            });
+
+            document.getElementById("signup-button").addEventListener("click", function () {
+                // Perform signup validation here
+                const signupUsername = document.getElementById("signup-username").value;
+                const signupPassword = document.getElementById("signup-password").value;
+                const signupName = document.getElementById("signup-name").value;
+                const signupDisability = document.getElementById("signup-disability").value;
+
+                // For simplicity, you can implement signup validation using JavaScript here
+                if (signupUsername && signupPassword && signupName && signupDisability) {
+                    // Successful signup
+                    alert("Signup successful!");
+                    // Redirect or perform further actions
+                } else {
+                    document.getElementById("signup-error").textContent = "Please fill in all fields.";
+                }
+            });
+
+            // Toggle between sign-up and login forms
+            document.getElementById("login-link").addEventListener("click", function () {
+                loginContainer.style.display = "block";
+                signupContainer.style.display = "none";
+            });
+
+            document.getElementById("signup-link").addEventListener("click", function () {
+                loginContainer.style.display = "none";
+                signupContainer.style.display = "block";
+            });
+        });
+    </script>
+</body>
+
+</html>
+
